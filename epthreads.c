@@ -6,7 +6,7 @@ int how_much_are_ready; /*qtos ja estao prontos ?*/
 pthread_mutex_t start=PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t launch_condition;
 
-#blalblalbalabba
+
 
 void help(char *name){
    printf("USO: %s <nome do arquivo de entrada>\n", name);
