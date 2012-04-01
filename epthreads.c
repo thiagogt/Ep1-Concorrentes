@@ -66,6 +66,21 @@ int retira_ciclista_da_posicao_se_ja_passou(int tid,int posicao,int faixa){
 	 }
 	 return posicao;
 }
+void verifica_velocidade_atual(vel velocidades,int posicao){
+	if(pista_de_corrida[posicao][0]==(int)'D'){
+		usleep(10000 - velocidades.descida*100);
+		printf("descida\n");
+	}
+	if(pista_de_corrida[posicao][0]==(int)'P'){
+		usleep(10000 - velocidades.plano*100);
+		printf("plano\n");
+	}
+	if(pista_de_corrida[posicao][0]==(int)'S'){
+		usleep(10000 - velocidades.subida*100);
+		printf("subida\n");
+	}
+
+}
 void comecou_corrida(int tid,vel velocidades){
 	int posicao;
 	int faixa;
@@ -73,7 +88,7 @@ void comecou_corrida(int tid,vel velocidades){
 	faixa = 1;
 	  for (posicao = 0; posicao < d;) {
 		  faixa = escreve_posicao_na_pista(tid,posicao,faixa);
-		  usleep(10000 - velocidades.plano*100);
+		  verifica_velocidade_atual(velocidades,posicao);
 		  posicao = retira_ciclista_da_posicao_se_ja_passou(tid,posicao,faixa);
 	  }
 }
@@ -84,7 +99,7 @@ void preparando_largada_do_ciclista(int tid){
 	   how_much_are_ready ++;
 	   printf("\nciclista %d na linha de largada\n", tid);
 	   if(how_much_are_ready == 50){
-	      printf("\e[01;31mPEDALA FIADAPORRA !\e[00m\n");
+	      printf("\e[01;31musleep(10000 - velocidades.plano*100);PEDALA FIADAPORRA !\e[00m\n");
 	      pthread_cond_broadcast(&launch_condition);
 	   }
 	   else
